@@ -14,15 +14,17 @@ import {
   setError,
 } from "../../redux/characterSlice";
 import { get, isEqual, size } from "lodash";
+import ScrollToTop from "../../components/scrollToTop/ScrollToTop";
 
 const Home = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.characters.data);
+  const page = useSelector((state) => state.characters.page);
 
   useEffect(() => {
     const getData = async () => {
       dispatch(startCall());
-      const res = await getAllCharacters();
+      const res = await getAllCharacters(page);
       if (isEqual(res.status, 200)) {
         dispatch(addData(get(res, "data.results")));
         dispatch(addInfo(get(res, "data.info")));
@@ -33,14 +35,15 @@ const Home = () => {
     };
 
     getData();
-  }, [dispatch]);
+  }, [page, dispatch]);
 
   return (
     <div className="w-screen min-h-[800px] h-auto">
+      <ScrollToTop />
       <SearchBar />
       <Filters />
       {size(data) > 0 ? <Cards /> : <NoResult />}
-      {size(data) < 20 ? <Pagination /> : null}
+      <Pagination />
     </div>
   );
 };

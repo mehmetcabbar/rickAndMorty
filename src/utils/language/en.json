@@ -6,5 +6,6 @@
   "goBack": "Go back",
   "notFound": "We couldn't find the page you're looking for.\nWould you like to go to the home page? ",
   "homePage": "Go To Home",
-  "noResult": "We couldn't find the character you're looking for.\nWould you like to try again? "
+  "noResult": "We couldn't find the character you're looking for.\nWould you like to try again? ",
+  "errorContent": "Something went wrong. We are trying to fix problem.\nPlease try again later."
 }

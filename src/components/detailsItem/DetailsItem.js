@@ -1,4 +1,4 @@
-import React from "react";
+import { upperFirst } from "lodash";
 
 const DetailsItem = ({ icon, title, content }) => {
   return (
@@ -10,7 +10,7 @@ const DetailsItem = ({ icon, title, content }) => {
           </div>
           {title}:
         </div>
-        <div>{content}</div>
+        <div>{upperFirst(content)}</div>
       </div>
     </div>
   );
