@@ -1,6 +1,4 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
-import MyButton from "../../components/myButton/MyButton";
 import { Link } from "react-router-dom";
 
 const NotFound = () => {
