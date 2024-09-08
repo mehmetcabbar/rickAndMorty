@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import SingleCard from "../singleCard/SingleCard";
 
 const Cards = () => {
-  const arr = Array.from(Array(20).keys());
   const [data, setData] = useState([]);
 
   useEffect(() => {

@@ -5,10 +5,7 @@ import Navigation from "./navigation/Navigation";
 function App() {
   return (
     <>
-      <div
-        className="bg-customBlack w-full h-auto bg-[url('./images/background.png')] bg-contain bg-top bg-no-repeat"
-        // style={{backgroundSize: "100%" "500px"}}
-      >
+      <div className="bg-customBlack w-full h-auto bg-[url('./images/background.png')] bg-contain bg-top bg-no-repeat">
         <Header />
         <Navigation />
       </div>
