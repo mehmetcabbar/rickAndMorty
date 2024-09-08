@@ -15,3 +15,11 @@ export const getSingleCharacter = async (id) => {
     return error;
   }
 };
+
+export const getSearchResults = async (search) => {
+  try {
+    return await api.get(`?name=${search}`);
+  } catch (error) {
+    return error;
+  }
+};

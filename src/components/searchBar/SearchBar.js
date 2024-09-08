@@ -1,13 +1,30 @@
 import { useState } from "react";
 import MyButton from "../myButton/MyButton";
 import { useTranslation } from "react-i18next";
+import { getSearchResults } from "../../utils/service/service";
+import { isEqual, lowerCase } from "lodash";
+import { useDispatch } from "react-redux";
+import {
+  addData,
+  addInfo,
+  setError,
+  setPage,
+} from "../../redux/characterSlice";
 
 const SearchBar = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const [search, setSearch] = useState("");
 
   const handleSearch = async () => {
-    console.log("search clicked");
+    const response = await getSearchResults(lowerCase(search));
+    if (isEqual(response.status, 200)) {
+      dispatch(addData(response.data.results));
+      dispatch(addInfo(response.data.info));
+      dispatch(setPage(1));
+    } else {
+      dispatch(setError());
+    }
   };
 
   return (
