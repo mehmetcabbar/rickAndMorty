@@ -3,5 +3,7 @@
   "footerSecond": "So come on, let's check for your favorite Rick and Morty character!",
   "search": "Search",
   "findYourCharacter": "Find your character...",
-  "goBack": "Go back"
+  "goBack": "Go back",
+  "notFound": "We couldn't find the page you're looking for.\nWould you like to go to the home page? ",
+  "homePage": "Go To Home"
 }
