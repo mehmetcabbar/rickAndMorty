@@ -9,7 +9,6 @@ import { isEqual, toInteger } from "lodash";
 const Pagination = () => {
   const dispatch = useDispatch();
   const page = useSelector((state) => state.characters.page);
-  const value = useSelector((state) => state.characters.value);
   const info = useSelector((state) => state.characters.info);
   const outsideBox =
     "w-12 h-12 md:w-16 md:h-16 bg-sofBlack hover:bg-appColor hover:bg- flex justify-center items-center rounded-xl cursor-pointer font-custom text-sm md:text-md";
@@ -44,10 +43,10 @@ const Pagination = () => {
         {isEqual(info?.pages - 5, page) ? info?.pages - 2 : "..."}
       </div>
       <div onClick={() => handlePage(info?.pages - 1)} className={outsideBox}>
-        {info?.pages - 1}
+        {toInteger(info?.pages) - 1}
       </div>
       <div onClick={() => handlePage(info?.pages)} className={outsideBox}>
-        {info?.pages}
+        {toInteger(info?.pages)}
       </div>
       <div onClick={handleNext} className={outsideBox}>
         <i className="fa fa-chevron-right"></i>
