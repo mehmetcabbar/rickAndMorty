@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "../components/searchBar/SearchBar";
 import Filters from "../components/filters/Filters";
 import Cards from "../components/cards/Cards";
+import Pagination from "../components/pagination/Pagination";
 
 const Navigation = () => {
   return (
@@ -9,6 +10,7 @@ const Navigation = () => {
       <SearchBar />
       <Filters />
       <Cards />
+      <Pagination />
     </div>
   );
 };
