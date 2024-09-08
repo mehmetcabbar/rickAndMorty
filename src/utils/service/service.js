@@ -23,3 +23,11 @@ export const getSearchResults = async (search) => {
     return error;
   }
 };
+
+export const getFilteredResults = async (filter) => {
+  try {
+    return await api.get(`?gender=${filter}`);
+  } catch (error) {
+    return error;
+  }
+};

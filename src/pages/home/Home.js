@@ -35,7 +35,8 @@ const Home = () => {
     };
 
     getData();
-  }, [page, dispatch]);
+    // eslint-disable-next-line
+  }, [page]);
 
   return (
     <div className="w-screen min-h-[800px] h-auto">
