@@ -3,14 +3,16 @@ import SearchBar from "../../components/searchBar/SearchBar";
 import Filters from "../../components/filters/Filters";
 import Cards from "../../components/cards/Cards";
 import Pagination from "../../components/pagination/Pagination";
+import NoResult from "../../components/noResult/NoResult";
 
 const Home = () => {
+  const result = true;
   return (
     <div className="w-screen min-h-[800px] h-auto">
       <SearchBar />
       <Filters />
-      <Cards />
-      <Pagination />
+      {result ? <Cards /> : <NoResult />}
+      {result ? <Pagination /> : null}
     </div>
   );
 };
