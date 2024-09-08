@@ -1,17 +1,19 @@
-import React from "react";
-import SearchBar from "../components/searchBar/SearchBar";
-import Filters from "../components/filters/Filters";
-import Cards from "../components/cards/Cards";
-import Pagination from "../components/pagination/Pagination";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "../pages/home/Home";
+import Details from "../pages/details/Details";
 
 const Navigation = () => {
   return (
-    <div className="w-screen min-h-[800px] h-auto">
-      <SearchBar />
-      <Filters />
-      <Cards />
-      <Pagination />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/details/:id" element={<Details />} />
+        <Route
+          path="*"
+          element={<h2 className="text-white">404 - Page Not Found</h2>}
+        />
+      </Routes>
+    </Router>
   );
 };
 
