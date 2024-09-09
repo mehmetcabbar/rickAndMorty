@@ -16,17 +16,19 @@ export const getSingleCharacter = async (id) => {
   }
 };
 
-export const getSearchResults = async (search) => {
+export const getSearchResults = async (search, page = 1, gender) => {
   try {
-    return await api.get(`?name=${search}`);
-  } catch (error) {
-    return error;
-  }
-};
-
-export const getFilteredResults = async (filter) => {
-  try {
-    return await api.get(`?gender=${filter}`);
+    let query = `?`;
+    if (search) {
+      query += `&name=${search}`;
+    }
+    if (gender) {
+      query += `&gender=${gender}`;
+    }
+    if (page) {
+      query += `&page=${page}`;
+    }
+    return await api.get(query);
   } catch (error) {
     return error;
   }

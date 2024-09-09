@@ -1,61 +1,52 @@
 import { useState } from "react";
-import {
-  getAllCharacters,
-  getFilteredResults,
-} from "../../utils/service/service";
 import { isEqual, lowerCase } from "lodash";
 import { useDispatch } from "react-redux";
-import {
-  addData,
-  addInfo,
-  endCall,
-  setError,
-  startCall,
-} from "../../redux/characterSlice";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { setPage } from "../../redux/characterSlice";
 
-const Filters = () => {
+const Filters = ({ onChange }) => {
+  const myFilters = [
+    { key: "all", value: "All" },
+    { key: "female", value: "Female" },
+    { key: "male", value: "Male" },
+    { key: "genderless", value: "Genderless" },
+    { key: "unknown", value: "Unknown" },
+  ];
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const myFilters = ["All", "Female", "Male", "Genderless", "Unknown"];
-  const [active, setActive] = useState("All");
+  const [searchParams] = useSearchParams();
+  const gender = searchParams.get("gender");
+  const [active, setActive] = useState(gender || "all");
 
   const handleFilter = async (filter) => {
     setActive(filter);
-    if (isEqual(filter, "All")) {
-      dispatch(startCall());
-      const response = await getAllCharacters(1);
-      if (isEqual(response.status, 200)) {
-        dispatch(addData(response.data.results));
-        dispatch(addInfo(response.data.info));
-      } else {
-        dispatch(setError());
-      }
-      dispatch(endCall());
+    dispatch(setPage(1));
+    const newParams = new URLSearchParams(searchParams);
+
+    if (isEqual(filter, "all")) {
+      newParams.delete("gender");
+      navigate(`/?${newParams.toString()}`);
+      onChange("");
     } else {
-      dispatch(startCall());
-      const response = await getFilteredResults(lowerCase(filter));
-      if (isEqual(response.status, 200)) {
-        dispatch(addData(response.data.results));
-        dispatch(addInfo(response.data.info));
-      } else {
-        dispatch(setError());
-      }
-      dispatch(endCall());
+      newParams.set("gender", lowerCase(filter));
+      navigate(`/?${newParams.toString()}`);
+      onChange(filter);
     }
   };
 
   return (
-    <div className="text-white container mx-auto flex gap-5 mt-8 px-4 md:px-0">
+    <div className="container mx-auto px-4 mt-8 text-white flex gap-5 mt-2 md:px-0">
       {myFilters.map((filter, key) => (
         <div key={key} className="flex items-center font-custom">
           <label
-            onClick={() => handleFilter(filter)}
+            onClick={() => handleFilter(filter.key)}
             className={
-              filter === active
+              filter.key === active
                 ? "text-appColor"
                 : "text-customGray hover:text-white cursor-pointer"
             }
           >
-            {filter}
+            {filter.value}
           </label>
         </div>
       ))}

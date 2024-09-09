@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DetailsItem from "../../components/detailsItem/DetailsItem";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ import DetailsSkeleton from "../../components/detailsSkeleton/DetailsSkeleton";
 const Details = () => {
   const { id } = useParams();
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [data, setData] = useState({});
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -73,11 +74,12 @@ const Details = () => {
             title={"Origin"}
             content={get(data, "origin.name")}
           />
-          <Link to={"/"}>
-            <div className="mt-10 w-28 h-12 rounded-2xl flex justify-center items-center bg-appColor font-custom">
-              {t("goBack")}
-            </div>
-          </Link>
+          <div
+            onClick={() => navigate(-1)}
+            className="mt-10 w-28 h-12 rounded-2xl flex justify-center items-center cursor-pointer bg-appColor font-custom"
+          >
+            {t("goBack")}
+          </div>
         </div>
       </div>
     </div>

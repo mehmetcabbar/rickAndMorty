@@ -1,38 +1,31 @@
 import { useState } from "react";
+import { lowerCase } from "lodash";
+import { useSelector } from "react-redux";
 import MyButton from "../myButton/MyButton";
 import { useTranslation } from "react-i18next";
-import { getSearchResults } from "../../utils/service/service";
-import { isEqual, lowerCase } from "lodash";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addData,
-  addInfo,
-  endCall,
-  setError,
-  startCall,
-} from "../../redux/characterSlice";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-const SearchBar = () => {
+const SearchBar = ({ handleSearch }) => {
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("query");
+
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [search, setSearch] = useState(searchQuery || "");
   const isLoading = useSelector((state) => state.characters.isLoading);
-  const [search, setSearch] = useState("");
-
-  const handleSearch = async () => {
-    dispatch(startCall());
-    const response = await getSearchResults(lowerCase(search));
-    if (isEqual(response.status, 200)) {
-      dispatch(addData(response.data.results));
-      dispatch(addInfo(response.data.info));
-    } else {
-      dispatch(setError());
-    }
-    dispatch(endCall());
-  };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      handleSearch();
+      const newParams = new URLSearchParams(searchParams);
+
+      if (search) {
+        newParams.set("query", lowerCase(search));
+      } else {
+        newParams.delete("query");
+      }
+
+      navigate(`/?${newParams.toString()}`);
+      handleSearch(search);
     }
   };
 
@@ -51,12 +44,12 @@ const SearchBar = () => {
           <MyButton
             title={
               isLoading ? (
-                <i class="fa fa-spinner" aria-hidden="true"></i>
+                <i className="fa fa-spinner" aria-hidden="true"></i>
               ) : (
                 t("search")
               )
             }
-            onClick={handleSearch}
+            onClick={() => handleSearch(search)}
           />
         </div>
       </div>

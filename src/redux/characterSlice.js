@@ -4,9 +4,9 @@ const initialState = {
   isLoading: true,
   data: [],
   info: {},
-  value: 0,
   error: false,
   page: 1,
+  isSearch: false,
 };
 
 export const charactersSlice = createSlice({
@@ -28,15 +28,18 @@ export const charactersSlice = createSlice({
     },
     setError: (state) => {
       state.error = true;
-    },
-    incrementPage: (state, action) => {
-      state.page = action.payload;
-    },
-    decrementPage: (state, action) => {
-      state.page = action.payload;
+      state.data = [];
+      state.info = {};
+      state.page = 1;
     },
     setPage: (state, action) => {
       state.page = action.payload;
+    },
+    setSearchResult: (state) => {
+      state.isSearch = true;
+    },
+    setRegularResult: (state) => {
+      state.isSearch = false;
     },
   },
 });
@@ -47,8 +50,8 @@ export const {
   addInfo,
   endCall,
   setError,
-  incrementPage,
-  decrementPage,
   setPage,
+  setSearchResult,
+  setRegularResult,
 } = charactersSlice.actions;
 export default charactersSlice.reducer;
