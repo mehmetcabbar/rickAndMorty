@@ -32,6 +32,12 @@ export const charactersSlice = createSlice({
       state.info = {};
       state.page = 1;
     },
+    incrementPage: (state, action) => {
+      state.page = action.payload;
+    },
+    decrementPage: (state, action) => {
+      state.page = action.payload;
+    },
     setPage: (state, action) => {
       state.page = action.payload;
     },
@@ -50,6 +56,8 @@ export const {
   addInfo,
   endCall,
   setError,
+  incrementPage,
+  decrementPage,
   setPage,
   setSearchResult,
   setRegularResult,

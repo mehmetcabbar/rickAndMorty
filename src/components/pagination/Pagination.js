@@ -1,5 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setPage } from "../../redux/characterSlice";
+import {
+  decrementPage,
+  incrementPage,
+  setPage,
+} from "../../redux/characterSlice";
 import { isEqual } from "lodash";
 import { useEffect } from "react";
 
@@ -11,6 +15,20 @@ const Pagination = () => {
   const totalPages = info?.pages || 0;
 
   const outsideBox = `w-12 h-12 md:w-16 md:h-16 flex justify-center items-center rounded-xl cursor-pointer font-custom text-sm md:text-md transition-all duration-300 ease-in-out`;
+
+  const handlePrev = () => {
+    if (page > 1) {
+      dispatch(decrementPage(page - 1));
+      window?.scrollTo(0, 0);
+    }
+  };
+
+  const handleNext = () => {
+    if (info?.pages > page) {
+      dispatch(incrementPage(page + 1));
+      window?.scrollTo(0, 0);
+    }
+  };
 
   const handlePage = (myPage) => {
     if (myPage !== page) {
@@ -49,6 +67,16 @@ const Pagination = () => {
 
   return totalPages > 1 ? (
     <div className="text-white flex w-full h-auto justify-center mt-8 gap-1 px-4">
+      <div
+        onClick={handlePrev}
+        className={
+          isEqual(page, 1)
+            ? `${outsideBox} text-sofBlack bg-gray-800`
+            : `${outsideBox} bg-sofBlack hover:bg-appColor text-gray-400`
+        }
+      >
+        <i className="fa fa-chevron-left"></i>
+      </div>
       {getPages().map((pg, index) => (
         <div
           key={index}
@@ -62,6 +90,17 @@ const Pagination = () => {
           {pg}
         </div>
       ))}
+      {/* Next button */}
+      <div
+        onClick={handleNext}
+        className={
+          isEqual(page, totalPages)
+            ? `${outsideBox} text-sofBlack bg-gray-800`
+            : `${outsideBox} bg-sofBlack hover:bg-appColor text-gray-400`
+        }
+      >
+        <i className="fa fa-chevron-right"></i>
+      </div>
     </div>
   ) : null;
 };

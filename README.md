@@ -1,4 +1,4 @@
-# Rick and Morty | FrontEnd Case
+# Rick and Morty
 
 This project was created with [Create React App](https://github.com/facebook/create-react-app). To quickly download and run this project, simply follow the steps below. I'm confident you'll complete the setup and start exploring the project in just a few easy steps. First make sure to you have node in computer.
 
@@ -20,7 +20,8 @@ yarn install
 
 ## Start the project
 
-Once the installation process is complete, you only need one more step to run the project. In the same terminal, run:
+Once the installation process is complete, you only need one more step to run the project.\
+In the same terminal, run:
 
 ```
 yarn start
