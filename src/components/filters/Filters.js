@@ -35,7 +35,7 @@ const Filters = ({ onChange }) => {
   };
 
   return (
-    <div className="container mx-auto px-4 mt-8 text-white flex gap-5 mt-2 md:px-0">
+    <div className="container mx-auto px-4 mt-8 text-white flex gap-5 md:px-0">
       {myFilters.map((filter, key) => (
         <div key={key} className="flex items-center font-custom">
           <label
