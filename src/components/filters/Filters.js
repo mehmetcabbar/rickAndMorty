@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { isEqual, lowerCase } from "lodash";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -33,6 +33,14 @@ const Filters = ({ onChange }) => {
       onChange(filter);
     }
   };
+
+  useEffect(() => {
+    if (gender) {
+      setActive(gender);
+    } else {
+      setActive("all");
+    }
+  }, [searchParams]);
 
   return (
     <div className="container mx-auto px-4 mt-8 text-white flex gap-5 md:px-0">

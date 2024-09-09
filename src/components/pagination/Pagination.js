@@ -90,7 +90,6 @@ const Pagination = () => {
           {pg}
         </div>
       ))}
-      {/* Next button */}
       <div
         onClick={handleNext}
         className={
