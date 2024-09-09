@@ -16,12 +16,14 @@ const Pagination = () => {
   const handlePrev = () => {
     if (page > 1) {
       dispatch(decrementPage(page - 1));
+      window?.scrollTo(0, 0);
     }
   };
 
   const handleNext = () => {
     if (info?.pages > page) {
       dispatch(incrementPage(page + 1));
+      window?.scrollTo(0, 0);
     }
   };
 

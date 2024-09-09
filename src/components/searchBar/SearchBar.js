@@ -3,15 +3,23 @@ import MyButton from "../myButton/MyButton";
 import { useTranslation } from "react-i18next";
 import { getSearchResults } from "../../utils/service/service";
 import { isEqual, lowerCase } from "lodash";
-import { useDispatch } from "react-redux";
-import { addData, addInfo, setError } from "../../redux/characterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addData,
+  addInfo,
+  endCall,
+  setError,
+  startCall,
+} from "../../redux/characterSlice";
 
 const SearchBar = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.characters.isLoading);
   const [search, setSearch] = useState("");
 
   const handleSearch = async () => {
+    dispatch(startCall());
     const response = await getSearchResults(lowerCase(search));
     if (isEqual(response.status, 200)) {
       dispatch(addData(response.data.results));
@@ -19,6 +27,7 @@ const SearchBar = () => {
     } else {
       dispatch(setError());
     }
+    dispatch(endCall());
   };
 
   const handleKeyDown = (e) => {
@@ -39,7 +48,16 @@ const SearchBar = () => {
           onKeyDown={handleKeyDown}
         />
         <div className="h-full w-auto my-2 px-1 py-1">
-          <MyButton title={t("search")} onClick={handleSearch} />
+          <MyButton
+            title={
+              isLoading ? (
+                <i class="fa fa-spinner" aria-hidden="true"></i>
+              ) : (
+                t("search")
+              )
+            }
+            onClick={handleSearch}
+          />
         </div>
       </div>
     </div>
