@@ -1,6 +1,8 @@
 # Rick and Morty
 
-This project was created with [Create React App](https://github.com/facebook/create-react-app). To quickly download and run this project, simply follow the steps below. I'm confident you'll complete the setup and start exploring the project in just a few easy steps. First make sure to you have node in computer.
+This project was created with [Create React App](https://github.com/facebook/create-react-app).\
+To quickly download and run this project, simply follow the steps below. \
+First make sure to have Node JS in your computer.
 
 ## Clone the project
 
