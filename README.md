@@ -10,20 +10,26 @@ Open your terminal and run this code below;
 git clone https://github.com/mehmetcabbar/rickAndMorty.git
 ```
 
-## Clone the project
+## Install dependencies
 
-Go to project folder and run this code inside of directory;
+Navigate to the project folder in your terminal, then run the following command to install the dependencies:
 
 ```
 yarn install
 ```
 
-When install process is done, we have just one step for the project run
-In same terminal, you can run that code below;
+## Start the project
+
+Once the installation process is complete, you only need one more step to run the project. In the same terminal, run:
 
 ```
 yarn start
 ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This will start the development server, and the project will be accessible in your browser.
+
+## Happy coding
+
+Thank you for taking the time to explore this project! \
+If you have any questions, feedback, or contributions, feel free to reach out. \
+Happy coding!
